@@ -304,31 +304,43 @@ void Sudoku::print()
  
 void Sudoku::changeNum(int a,int b)
 {
-  int transform=0;
-  int tempa=0;
-  int tempb=0;
+  int indexa[81];
+  int indexb[81];
+  for(int i=0;i<81;i++)
+  { indexa[i]=-1; indexb[i]=-1;}
 
-   
-  for(int j=0;j<81;j+=9)
+
+  
+  for(int i=0;i<81;i+=9)
   {
     
-   for(int k=0;k<9;k++)
-   {
-      if( map[k+j]==a )
-      { tempa=k+j; }
+    for(int j=0;j<9;j++)
+    {  
+      
+       if(map[i+j]!=0 && map[j+i]==a)
+       {
+         indexa[i]=j+i;
+       }
 
-      if( map[k+j]==b )
-      { tempb=k+j; }
+       if(map[i+j]!=0 && map[i+j]==b)
+       {
+         indexb[i]=j+i;
+       }
+      
+    }
+     
+  } 
 
+
+
+  for(int i=0;i<81;i++)
+  { 
+      
+      map[indexa[i]]=b;
     
-   }
-   
-    transform=map[tempa];
-    map[tempa]=map[tempb];
-    map[tempb]=transform;
-    
+      map[indexb[i]]=a;
   }
-   
+
 }
 
           
@@ -472,6 +484,8 @@ void Sudoku::flip(int n)
 void Sudoku::transform()
 {
   readIn();
+  print();
+  cout << endl << endl;
   change();
   print();
 }
@@ -480,8 +494,26 @@ void Sudoku::change()
 {
   unsigned int seed=(unsigned int)time(NULL);
   srand(seed);
+
   int a=1+rand()%9; int b=1+rand()%9;
-  changeNum(1,0);
+  
+  while(a==b)
+  { a=1+rand()%9; }
+ 
+  changeNum(a,b);
+
+  int c=0+rand()%3; int d=rand()%3;
+  while(c==d)
+  { c=rand()%3; }
+  
+  changeRow(c,d);
+
+
+  int e=0+rand()%3; int f=rand()%3;
+  while(e==f)
+  { e=rand()%3; }
+
+  changeCol(e,f);
   
 
 
