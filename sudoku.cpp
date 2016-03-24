@@ -484,8 +484,8 @@ void Sudoku::flip(int n)
 void Sudoku::transform()
 {
   readIn();
-  print();
-  cout << endl << endl;
+ // print();
+ // cout << endl << endl;
   change();
   print();
 }
@@ -515,7 +515,11 @@ void Sudoku::change()
 
   changeCol(e,f);
   
+  int g=0+rand()&100;
+  rotate(g); 
 
+  int h=0+rand()%2;
+  flip(h);
 
 }
 
