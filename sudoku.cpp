@@ -212,15 +212,11 @@ void Sudoku::giveQuestion()
    { data >> temp[j]; }
    questionarray[i].setmap(temp);
 
- }
+ }  
+    
+   questionarray[key].print();
      
   
-    
-  for(int i=0;i<81;i++)
-  {  
-     cout << questionarray[key].getelement(i) << " ";
-     if(i%9==8) { cout << endl; }
-  }
 
 
 }
@@ -255,13 +251,11 @@ void Sudoku::solve()
 
    if(solver(ques,ans)==true)
    { 
-     for(int i=0;i<81;i++)
-      { 
-         cout << ans.getelement(i) << " ";
-         if(i%9==8) { cout << endl; }
-      }
-     cout << "solve!" << endl;
-   }
+     
+      ans.print();
+     
+      cout << "solve!" << endl;
+    }
 
    else
    cout << "unsolve...." << endl;
@@ -298,9 +292,91 @@ bool Sudoku::solver(Sudoku question,Sudoku & answer)
   }
 }
 
- 
 
-      
+void Sudoku::print()
+{
+  for(int i=0;i<81;i++)
+  { cout << map[i] << " ";
+    if(i%9==8) { cout << endl; }
+  }
+}
+
+ 
+void Sudoku::changeNum(int a,int b)
+{
+  int transform=0;
+  int tempa=0;
+  int tempb=0;
+
+   
+  for(int j=0;j<81;j+=9)
+  {
+    
+   for(int k=0;k<9;k++)
+   {
+      if( map[k+j]==a )
+      { tempa=k+j; }
+
+      if( map[k+j]==b )
+      { tempb=k+j; }
+
+   }
+
+    transform=map[tempa];
+    map[tempa]=map[tempb];
+    map[tempb]=transform;
+    
+  }
+   
+}
+
+          
+void Sudoku::changeRow(int a,int b)
+{ 
+  int temp=0;
+  int rowa=a*3; int rowb=b*3;
+  int numbera=rowa*9; int numberb=rowb*9;  
+
+  for(int h=0;h<3;h++)
+  { 
+    int j=0; 
+    for(int k=0;k<9;k++)
+    {
+      temp=map[numbera+k+j];
+      map[numbera+k+j]=map[numberb+k+j]; 
+      map[numberb+k+j]=temp;
+    }
+    j=j+9;
+
+  }
+}    
+
+
+void Sudoku::changeCol(int a,int b)
+{
+  int temp;
+  int cola=3*a; int colb=3*b;
+  
+  for(int h=0;h<3;h++)
+  {
+    for(int i=0;i<81;i+=9)
+    { 
+      temp=map[cola+i+h];
+      map[cola+i+h]=map[colb+i+h];
+      map[colb+i+h]=temp;
+    }
+  }
+
+}
+
+
+
+
+
+
+
+
+ 
 
 
 

@@ -12,9 +12,14 @@ class Sudoku
   int getelement(int);
   bool iscorrect();
   const static int sudokusize=81;
+  void print();
   void giveQuestion();
   void readIn();
   void solve();
+  void changeNum(int,int);
+  void changeRow(int,int);
+  void changeCol(int,int);
+
 
   private:
   bool solver(Sudoku,Sudoku &); 
