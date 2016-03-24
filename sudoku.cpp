@@ -320,8 +320,9 @@ void Sudoku::changeNum(int a,int b)
       if( map[k+j]==b )
       { tempb=k+j; }
 
+    
    }
-
+   
     transform=map[tempa];
     map[tempa]=map[tempb];
     map[tempb]=transform;
@@ -334,40 +335,42 @@ void Sudoku::changeNum(int a,int b)
 void Sudoku::changeRow(int a,int b)
 { 
   int temp=0;
-  int rowa=a*3; int rowb=b*3;
-  int numbera=rowa*9; int numberb=rowb*9;  
+  int q;
+  if(a-b>0) {q=a-b;} else {q=b-a;}
 
-  for(int h=0;h<3;h++)
+  for(int h=0;h<27;h+=9)
   { 
-    int j=0; 
+     
     for(int k=0;k<9;k++)
     {
-      temp=map[numbera+k+j];
-      map[numbera+k+j]=map[numberb+k+j]; 
-      map[numberb+k+j]=temp;
+      temp=map[h+k];
+      map[h+k]=map[h+k+q*27]; 
+      map[h+k+q*27]=temp;
     }
-    j=j+9;
+    
 
   }
 }    
 
 
 void Sudoku::changeCol(int a,int b)
-{
-  int temp;
-  int cola=3*a; int colb=3*b;
-  
-  for(int h=0;h<3;h++)
-  {
-    for(int i=0;i<81;i+=9)
-    { 
-      temp=map[cola+i+h];
-      map[cola+i+h]=map[colb+i+h];
-      map[colb+i+h]=temp;
-    }
-  }
+{ 
+  int temp=0;
+  int q;
+  if(a-b>0) {q=a-b;} else {q=b-a;}
 
-}
+  for(int h=0;h<3;h++)
+  { 
+    for(int k=0;k<81;k+=9)
+    {
+      temp=map[h+k];
+      map[h+k]=map[h+k+q*3]; 
+      map[h+k+q*3]=temp;
+    }
+    
+  }
+}    
+
 
 void Sudoku::rotate(int n)
 {
@@ -466,4 +469,21 @@ void Sudoku::flip(int n)
  
 }
 
+void Sudoku::transform()
+{
+  readIn();
+  change();
+  print();
+}
+
+void Sudoku::change()
+{
+  unsigned int seed=(unsigned int)time(NULL);
+  srand(seed);
+  int a=1+rand()%9; int b=1+rand()%9;
+  changeNum(1,0);
+  
+
+
+}
 
