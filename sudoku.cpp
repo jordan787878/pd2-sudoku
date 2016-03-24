@@ -369,18 +369,101 @@ void Sudoku::changeCol(int a,int b)
 
 }
 
-
-
-
-
-
-
-
+void Sudoku::rotate(int n)
+{
  
-
-
-
-
+ 
+  int tempstore[81];
+  for(int i=0;i<81;i++)
+  { tempstore[i]=0; }
   
+ if(n%4==1)
+ {     
+  int i;  int h;
+  for(i=0;i<81;i+=9)
+   {  int q=i/9;
+      int j=8-q;
+      int k=0;
+
+      for(h=0;h<9;h++)
+      { 
+        tempstore[j+k]=map[i+h]; 
+        k=k+9;  
+      }        
+
+    }
+    setmap(tempstore);
+ }   
+  
+ if(n%4==2)
+ {
+   for(int i=0;i<81;i+=9)
+   {
+     for(int j=0;j<9;j++)
+     {
+       tempstore[80-i-j]=map[i+j];
+     }  
+   }
+   setmap(tempstore);
+ }
+
+ if(n%4==3)
+ {  
+   int k=72;
+   for(int i=0;i<81;i+=9)
+   {
+     int h=0;
+     
+     for(int j=0;j<9;j++)
+     {  
+        tempstore[k-h]=map[i+j];
+        h+=9; 
+     }
+    
+     k++;
+   }
+   setmap(tempstore);
+ }
+
+
+
+}
+    
+void Sudoku::flip(int n)
+{
+  int tempstore[81];
+  for(int i=0;i<81;i++)
+  { tempstore[i]=0; }
+
+  if(n==0)
+  {
+    int k=72;
+    for(int i=0;i<81;i+=9)
+    { 
+     
+      for(int j=0;j<9;j++)
+      { 
+        tempstore[k+j]=map[i+j];
+      }
+      
+      k=k-9;
+    }
+
+    setmap(tempstore);
+  }
+ 
+  if(n==1)
+  {
+    for(int i=0;i<9;i++)
+    {
+     for(int j=0;j<81;j+=9)
+     { 
+       tempstore[j+8-i]=map[i+j];
+     }
+    }
+   setmap(tempstore);
+  }
+ 
+}
 
 

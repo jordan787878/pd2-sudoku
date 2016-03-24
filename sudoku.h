@@ -19,7 +19,8 @@ class Sudoku
   void changeNum(int,int);
   void changeRow(int,int);
   void changeCol(int,int);
-
+  void rotate(int);
+  void flip(int);
 
   private:
   bool solver(Sudoku,Sudoku &); 
