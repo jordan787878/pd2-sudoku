@@ -193,33 +193,36 @@ return true;
 
 void Sudoku::giveQuestion()
 {
-  int casenumber=0;
-  unsigned int seed=(unsigned int)time(NULL);
-  srand(seed);
-  int key=-1;
+// int casenumber=0;
+// unsigned int seed=(unsigned int)time(NULL);
+// srand(seed);
+// int key=-1;
   
-  ifstream data("quslibrary",ios::in);
-  data >> casenumber;
+//  ifstream data("quslibrary",ios::in);
+//  data >> casenumber;
  
-  key=0+rand()%casenumber;
- // cout << key; cout << endl;
-  int temp[81];
-  Sudoku questionarray[casenumber];
+//  key=0+rand()%casenumber;
+// cout << key; cout << endl;
+//  int temp[81];
+//  Sudoku questionarray[casenumber];
  
   
- for(int i=0;i<casenumber;i++)
- {  
-   for(int j=0;j<81;j++)
-   { data >> temp[j]; }
-   questionarray[i].setmap(temp);
+// for(int i=0;i<casenumber;i++)
+// {  
+   Sudoku question;
+   int temp[81]={8,0,0,0,0,0,0,0,0,
+                 0,0,3,6,0,0,0,0,0,
+                 0,7,0,0,9,0,2,0,0,
+                 0,5,0,0,0,7,0,0,0,
+                 0,0,0,0,4,5,7,0,0,
+                 0,0,0,1,0,0,0,3,0,
+                 0,0,1,0,0,0,0,6,8,
+                 0,0,8,5,0,0,0,1,0,
+                 0,9,0,0,0,0,4,0,0};
 
- }  
-    
-   questionarray[key].print();
-     
+   question.setmap(temp); 
+   question.print();     
   
-
-
 }
 
 void Sudoku::readIn()
