@@ -225,7 +225,7 @@ void Sudoku::giveQuestion()
 void Sudoku::readIn()
 
 { 
-  cout << "input 81 number(1-9)" << endl;
+//  cout << "input 81 number(1-9)" << endl;
 
   int temp[81];
   for(int i=0;i<81;i++)
@@ -240,7 +240,7 @@ void Sudoku::readIn()
 }     
 
 
-void Sudoku::solve()
+void Sudoku::solve()   //need to find the balance between                                              // speed and solving for mutiple solves...
 {
   
   
@@ -263,31 +263,35 @@ void Sudoku::solve()
    
 
   
-  if(solvera(quesa,ansa)==true)
+ /* if(solvera(quesa,ansa)==true)
   {
     for(int i=0;i<81;i++)
     { tempa.at(i)=ansa.getelement(i); }
-
+     //  ansa.print();
   }
    
   if(multi(multiq,multia)==true)
   { 
     for(int i=0;i<81;i++)
     { tempb.at(i)=multia.getelement(i); }
-  }
+  }*/
 
  
-if(solvera(quesa,ansa)==false && multi(multiq,multia)==false)
-cout << '0'<< endl;
 
 
 if(solvera(quesa,ansa)==true && multi(multiq,multia)==true)
 {
+    for(int i=0;i<81;i++)
+    { tempa.at(i)=ansa.getelement(i); }
+    for(int i=0;i<81;i++)
+    { tempb.at(i)=multia.getelement(i); }
+  
   if(tempa!=tempb) { cout << '2' << endl;}
-  if(tempa==tempb) { cout << '1' << endl;  ansa.print(); }
+  else { cout << '1' << endl;  ansa.print(); }
 }
 
- 
+else
+cout << '0' << endl;
  
 }
 
