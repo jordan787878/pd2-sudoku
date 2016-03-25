@@ -3,6 +3,7 @@
 #include<cstdlib>
 #include<time.h>
 #include"sudoku.h"
+#include<vector>
 using namespace std;
 
 Sudoku::Sudoku()
@@ -241,28 +242,57 @@ void Sudoku::readIn()
 
 void Sudoku::solve()
 {
-  Sudoku::Sudoku ques;
-  Sudoku::Sudoku ans;
+  
+  
+  vector<int> tempa(81);
+  vector<int> tempb(81);
+  
+  
+  Sudoku quesa;
+  Sudoku multiq;
+
+  Sudoku ansa;
+  Sudoku multia;
 
    for(int i=0;i<81;i++)
-   { 
-     ques.setelement(i,map[i]);
+   {
+     quesa.setelement(i,map[i]);
+     multiq.setelement(i,map[i]);
    }
 
-   if(solver(ques,ans)==true)
-   { 
-     
-      ans.print();
-     
-      cout << "solve!" << endl;
-    }
+   
 
-   else
-   cout << "unsolve...." << endl;
+  
+  if(solvera(quesa,ansa)==true)
+  {
+    for(int i=0;i<81;i++)
+    { tempa.at(i)=ansa.getelement(i); }
+
+  }
+   
+  if(multi(multiq,multia)==true)
+  { 
+    for(int i=0;i<81;i++)
+    { tempb.at(i)=multia.getelement(i); }
+  }
+
+ 
+if(solvera(quesa,ansa)==false && multi(multiq,multia)==false)
+cout << '0'<< endl;
+
+
+if(solvera(quesa,ansa)==true && multi(multiq,multia)==true)
+{
+  if(tempa!=tempb) { cout << '2' << endl;}
+  if(tempa==tempb) { cout << '1' << endl;  ansa.print(); }
+}
+
+ 
+ 
 }
 
 
-bool Sudoku::solver(Sudoku question,Sudoku & answer)
+bool Sudoku::solvera(Sudoku question,Sudoku & answer)
 {
   int blankindex;
   blankindex=question.getzero();
@@ -272,24 +302,55 @@ bool Sudoku::solver(Sudoku question,Sudoku & answer)
     if(question.iscorrect()==true)
     { answer=question; return true; }
 
-    else
+    if(question.iscorrect()==false)
     { return false; }
   }
 
   else
-  {
-    for(int j=1;j<=9;j++)
+  { 
+    for(int j=1;j<=9;j++)            //question solve 7 1 5
     {  
        question.setelement(blankindex,j);
        if(question.iscorrect())
        {  
-          if(solver(question,answer))
+          if(solvera(question,answer))
           { return true; }
 
        } 
     }
      return false;
+   } 
+  
+
+}
+
+
+bool Sudoku::multi(Sudoku question,Sudoku & answer)
+{
+  int blankindex;
+  blankindex=question.getzero();
+  if(blankindex==-1)
+  { 
+    if(question.iscorrect()==true)
+    { answer=question; return true; }
+
+    if(question.iscorrect()==false)
+    { return false; }
+
   }
+  else
+  { 
+    for(int j=9;j>=1;j--)            //question solve 7 6 5
+    {  
+       question.setelement(blankindex,j);
+       if(question.iscorrect())
+       {
+          if(multi(question,answer))
+          { return true; }
+       }
+    } 
+     return false;
+   } 
 }
 
 
@@ -483,7 +544,7 @@ void Sudoku::flip(int n)
 
 void Sudoku::transform()
 {
-  readIn();
+ // readIn();
  // print();
  // cout << endl << endl;
   change();

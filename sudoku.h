@@ -21,10 +21,16 @@ class Sudoku
   void changeCol(int,int);
   void rotate(int);
   void flip(int);
-
+  void transform();
+  
+ 
   private:
-  bool solver(Sudoku,Sudoku &); 
+  bool solvera(Sudoku,Sudoku &);
+  bool multi(Sudoku,Sudoku &);
   bool check(int[]);
   int map[sudokusize];
+  void change();
+  void getbackzero();
+
 };
 
