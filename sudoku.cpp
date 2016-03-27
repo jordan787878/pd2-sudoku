@@ -2,7 +2,7 @@
 #include<fstream>
 #include<cstdlib>
 #include<time.h>
-#include"sudoku.h"
+#include"Sudoku.h"
 #include<vector>
 using namespace std;
 
@@ -193,22 +193,7 @@ return true;
 
 void Sudoku::giveQuestion()
 {
-// int casenumber=0;
-// unsigned int seed=(unsigned int)time(NULL);
-// srand(seed);
-// int key=-1;
   
-//  ifstream data("quslibrary",ios::in);
-//  data >> casenumber;
- 
-//  key=0+rand()%casenumber;
-// cout << key; cout << endl;
-//  int temp[81];
-//  Sudoku questionarray[casenumber];
- 
-  
-// for(int i=0;i<casenumber;i++)
-// {  
    Sudoku question;
    int temp[81]={8,0,0,0,0,0,0,0,0,
                  0,0,3,6,0,0,0,0,0,
@@ -220,16 +205,15 @@ void Sudoku::giveQuestion()
                  0,0,8,5,0,0,0,1,0,
                  0,9,0,0,0,0,4,0,0};
 
-   question.setmap(temp); 
-   question.print();     
+   question.setmap(temp);
+   question.transform(); 
+        
   
 }
 
 void Sudoku::readIn()
 
 { 
-//  cout << "input 81 number(1-9)" << endl;
-
   int temp[81];
   for(int i=0;i<81;i++)
   {  temp[i]=0; }
@@ -252,42 +236,26 @@ void Sudoku::solve()   //need to find the balance between                       
   
   
   Sudoku quesa;
-  Sudoku multiq;
-
+ // Sudoku multiq;
+  
   Sudoku ansa;
   Sudoku multia;
 
    for(int i=0;i<81;i++)
    {
      quesa.setelement(i,map[i]);
-     multiq.setelement(i,map[i]);
+   //  multiq.setelement(i,map[i]);
+     
    }
 
-   
-
   
- /* if(solvera(quesa,ansa)==true)
-  {
-    for(int i=0;i<81;i++)
-    { tempa.at(i)=ansa.getelement(i); }
-     //  ansa.print();
-  }
-   
-  if(multi(multiq,multia)==true)
-  { 
-    for(int i=0;i<81;i++)
-    { tempb.at(i)=multia.getelement(i); }
-  }*/
-
- 
-
-
-if(solvera(quesa,ansa)==true && multi(multiq,multia)==true)
+  
+if(solvera(quesa,ansa)==true && multi(quesa,multia)==true)
 {
     for(int i=0;i<81;i++)
-    { tempa.at(i)=ansa.getelement(i); }
-    for(int i=0;i<81;i++)
-    { tempb.at(i)=multia.getelement(i); }
+    { tempa.at(i)=ansa.getelement(i);    
+      tempb.at(i)=multia.getelement(i); }
+   
   
   if(tempa!=tempb) { cout << '2' << endl;}
   else { cout << '1' << endl;  ansa.print(); }
