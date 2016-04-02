@@ -28,7 +28,6 @@ void Sudoku::setelement(int index,int number)
 {  
    map[index]=number;
 }
-
 int Sudoku::getzero()
 { 
   for(int i=0;i<81;i++)
@@ -239,24 +238,26 @@ void Sudoku::solve()
   Sudoku multia;
 
    for(int i=0;i<81;i++)
-   {
-     quesa.setelement(i,map[i]);
-    
-   }
+   { quesa.setelement(i,map[i]); }
 
-  
-  
-if(solvera(quesa,ansa)==true && multi(quesa,multia)==true)
+
+ 
+if(solvera(quesa,ansa)==true)
 {
     for(int i=0;i<81;i++)
     { tempa.at(i)=ansa.getelement(i);    
-      tempb.at(i)=multia.getelement(i); }
-   
+    }
   
-  if(tempa!=tempb) { cout << '2' << endl;}
-  else { cout << '1' << endl;  ansa.print(); }
-}
+    if(multi(quesa,multia)==true)
+    {
+     for(int i=0;i<81;i++)
+     { tempb.at(i)=multia.getelement(i); }
+    }
 
+ if(tempa!=tempb) { cout << '2' << endl; }
+ else { cout << '1' << endl; ansa.print(); }
+
+}
 else
 cout << '0' << endl;
 
@@ -267,9 +268,10 @@ cout << '0' << endl;
 
 bool Sudoku::solvera(Sudoku question,Sudoku & answer)
 {
+ 
   int blankindex;
   blankindex=question.getzero();
-
+  
   if(blankindex==-1)
   { 
     if(question.iscorrect()==true)
@@ -313,6 +315,7 @@ bool Sudoku::multi(Sudoku question,Sudoku & answer)
   }
   else
   { 
+
     for(int j=9;j>=1;j--)       
     {  
        question.setelement(blankindex,j);
