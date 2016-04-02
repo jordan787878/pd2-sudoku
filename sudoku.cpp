@@ -229,8 +229,23 @@ void Sudoku::readIn()
 
 void Sudoku::solve()   //need to find the balance between                                              // speed and solving for mutiple solves...
 {
-  
-  
+int zeronumber=0;
+for(int i=0;i<81;i++)
+{ if(map[i]==0) {zeronumber++; } }
+
+if(zeronumber>=17)   
+{  
+   Sudoku ques; Sudoku ans;
+   for(int j=0;j<81;j++)
+   { ques.setelement(j,map[j]); }
+   if(solvera(ques,ans)==true)
+   { cout << '1' << endl; ans.print(); }
+   else
+   cout << '0'<< endl;
+}
+     
+else  
+{ 
   vector<int> tempa(81);
   vector<int> tempb(81);
   
@@ -263,6 +278,10 @@ if(solvera(quesa,ansa)==true && multi(quesa,multia)==true)
 
 else
 cout << '0' << endl;
+
+
+
+}
  
 }
 
