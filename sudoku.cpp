@@ -186,7 +186,6 @@ bool Sudoku::iscorrect()
       if(checkresult==false)
       return false;
   }
-
 return true;
 }
 
@@ -227,31 +226,14 @@ void Sudoku::readIn()
 }     
 
 
-void Sudoku::solve()   //need to find the balance between                                              // speed and solving for mutiple solves...
+void Sudoku::solve()   
 {
-int zeronumber=0;
-for(int i=0;i<81;i++)
-{ if(map[i]==0) {zeronumber++; } }
 
-if(zeronumber>=17)   
-{  
-   Sudoku ques; Sudoku ans;
-   for(int j=0;j<81;j++)
-   { ques.setelement(j,map[j]); }
-   if(solvera(ques,ans)==true)
-   { cout << '1' << endl; ans.print(); }
-   else
-   cout << '0'<< endl;
-}
-     
-else  
-{ 
   vector<int> tempa(81);
   vector<int> tempb(81);
   
   
   Sudoku quesa;
- // Sudoku multiq;
   
   Sudoku ansa;
   Sudoku multia;
@@ -259,8 +241,7 @@ else
    for(int i=0;i<81;i++)
    {
      quesa.setelement(i,map[i]);
-   //  multiq.setelement(i,map[i]);
-     
+    
    }
 
   
@@ -280,8 +261,6 @@ else
 cout << '0' << endl;
 
 
-
-}
  
 }
 
@@ -302,8 +281,8 @@ bool Sudoku::solvera(Sudoku question,Sudoku & answer)
 
   else
   { 
-    for(int j=1;j<=9;j++)            //question solve 7 1 5
-    {  
+    for(int j=1;j<=9;j++)            
+   {  
        question.setelement(blankindex,j);
        if(question.iscorrect())
        {  
@@ -334,7 +313,7 @@ bool Sudoku::multi(Sudoku question,Sudoku & answer)
   }
   else
   { 
-    for(int j=9;j>=1;j--)            //question solve 7 6 5
+    for(int j=9;j>=1;j--)       
     {  
        question.setelement(blankindex,j);
        if(question.iscorrect())
@@ -538,9 +517,6 @@ void Sudoku::flip(int n)
 
 void Sudoku::transform()
 {
- // readIn();
- // print();
- // cout << endl << endl;
   change();
   print();
 }
