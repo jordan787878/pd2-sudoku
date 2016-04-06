@@ -1,10 +1,10 @@
-all: sudoku.o giveQuestion.cpp solve.cpp transform.cpp
-	g++ -o giveQuestion giveQuestion.cpp sudoku.o
-	g++ -o solve solve.cpp sudoku.o
-	g++ -o transform transform.cpp sudoku.o
+all: Sudoku.o giveQuestion.cpp solve.cpp transform.cpp
+	g++ -o giveQuestion giveQuestion.cpp Sudoku.o
+	g++ -o solve solve.cpp Sudoku.o
+	g++ -o transform transform.cpp Sudoku.o
 
-sudoku.o: sudoku.cpp Sudoku.h
-	g++ -c sudoku.cpp
+Sudoku.o: Sudoku.cpp Sudoku.h
+	g++ -c Sudoku.cpp
 
 clean:
-	rm sudoku.o
+	rm Sudoku.o

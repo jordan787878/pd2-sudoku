@@ -244,7 +244,7 @@ void Sudoku::solve()
  
 if(solvera(quesa,ansa)==true)
 {
-   /* for(int i=0;i<81;i++)
+    for(int i=0;i<81;i++)
     { tempa.at(i)=ansa.getelement(i);    
     }
   
@@ -254,8 +254,8 @@ if(solvera(quesa,ansa)==true)
      { tempb.at(i)=multia.getelement(i); }
     }
 
- if(tempa!=tempb) { cout << '2' << endl; }*/
-// else
+ if(tempa!=tempb) { cout << '2' << endl; }
+ else
  { cout << '1' << endl; ansa.print(); }
 
 }
