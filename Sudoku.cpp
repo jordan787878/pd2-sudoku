@@ -210,7 +210,6 @@ void Sudoku::giveQuestion()
 }
 
 void Sudoku::readIn()
-
 { 
   int temp[81];
   for(int i=0;i<81;i++)
@@ -227,43 +226,51 @@ void Sudoku::readIn()
 
 void Sudoku::solve()   
 {
-
-  vector<int> tempa(81);
-  vector<int> tempb(81);
+	cout << "Solving...\n";
+	vector<int> tempa(81);
+  	vector<int> tempb(81);
   
-  
-  Sudoku quesa;
-  
-  Sudoku ansa;
-  Sudoku multia;
+  	Sudoku quesa;  
+  	Sudoku ansa;
+  	Sudoku multia;
 
-   for(int i=0;i<81;i++)
-   { quesa.setelement(i,map[i]); }
+	//set the question from stored map
+    for(int i=0;i<81;i++){ 
+		quesa.setelement(i,map[i]); 
+	}
 
+	//solve the question and store the answer in ansa obj.
+	if(solvera(quesa,ansa)==true){
+		//check for multiple answers. store answer1 in tempa; store answer2 in tempb
+    	for(int i=0;i<81;i++){ 
+			tempa.at(i)=ansa.getelement(i);    
+		}
+  		
+    	if(multi(quesa,multia)==true){
+     		for(int i=0;i<81;i++){ 
+				tempb.at(i)=multia.getelement(i); 
+			}
+    	}
+		
+		//compare answer1 and answer2
+ 		if(tempa!=tempb){ 
+		 	cout << "multiple answers:" << endl;
+		 	cout << "answer 1:\n";
+			ansa.print();
+			cout << endl;
+			cout << "answer 2:\n";
+			multia.print(); 
+		}
+ 		else{
+		 	cout << "single answer:\n"; 
+			ansa.print();
+			cout << endl; 
+		}
 
- 
-if(solvera(quesa,ansa)==true)
-{
-    for(int i=0;i<81;i++)
-    { tempa.at(i)=ansa.getelement(i);    
-    }
-  
-    if(multi(quesa,multia)==true)
-    {
-     for(int i=0;i<81;i++)
-     { tempb.at(i)=multia.getelement(i); }
-    }
-
- if(tempa!=tempb) { cout << '2' << endl; }
- else
- { cout << '1' << endl; ansa.print(); }
-
-}
-else
-cout << '0' << endl;
-
-
- 
+	}
+	else{
+		cout << "no answer found\n";
+	}
 }
 
 
@@ -277,8 +284,7 @@ bool Sudoku::solvera(Sudoku question,Sudoku & answer)
   { 
     if(question.iscorrect()==true)
     { answer=question; return true; }
-
-    if(question.iscorrect()==false)
+    else
     { return false; }
   }
 
